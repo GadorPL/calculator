@@ -1,3 +1,5 @@
+from art import logo
+
 # Calculator
 # Add
 def add(n1, n2):
@@ -26,22 +28,30 @@ operations = {
     "/": divide,
 }
 
-num1 = int(input("What's the first number?: "))
 
-for key in operations:
-    print(key)
+def calculator():
+    print(logo)
+    num1 = float(input("What's the first number?: "))
 
-calculating = True
-while calculating:
-    operation_symbol = input("Pick an operation: ")
-    num2 = int(input("What's the second number?: "))
+    for key in operations:
+        print(key)
 
-    calc_function = operations[operation_symbol]
-    answer = calc_function(num1, num2)
+    calculating = True
+    while calculating:
+        operation_symbol = input("Pick an operation: ")
+        num2 = float(input("What's the next number?: "))
 
-    print(f"{num1} {operation_symbol} {num2} = {answer}")
-    num1 = answer
+        calc_function = operations[operation_symbol]
+        answer = calc_function(num1, num2)
 
-    choice = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to exit.: ")
-    if choice.lower() == 'n':
-        calculating = False
+        print(f"{num1} {operation_symbol} {num2} = {answer}")
+
+        choice = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start again.: ")
+        if choice.lower() == 'y':
+            num1 = answer
+        else:
+            calculating = False
+            calculator()
+
+
+calculator()
